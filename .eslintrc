@@ -1,0 +1,22 @@
+{
+    "rules": {
+        "quotes": [
+            2,
+            "single"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-unused-vars" : 2,
+        "no-undef" : 2
+    },
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    }
+}
