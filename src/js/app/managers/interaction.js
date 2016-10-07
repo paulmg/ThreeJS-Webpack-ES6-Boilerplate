@@ -10,18 +10,20 @@ export default class Interaction {
     this.camera = camera;
     this.controls = controls;
 
+    this.timeout = null;
+
     // Instantiate keyboard helper
     this.keyboard = new Keyboard();
 
     // Listeners
     // Mouse events
-    this.renderer.domElement.addEventListener('mouseup', (event) => this.onMouseUp(event), false);
     this.renderer.domElement.addEventListener('mousemove', (event) => Helpers.throttle(this.onMouseMove(event), 250), false);
     this.renderer.domElement.addEventListener('mouseleave', (event) => this.onMouseLeave(event), false);
     this.renderer.domElement.addEventListener('mouseover', (event) => this.onMouseOver(event), false);
 
     // Keyboard events
     this.keyboard.domElement.addEventListener('keydown', (event) => {
+      // Only once
       if(event.repeat) {
         return;
       }
@@ -47,7 +49,9 @@ export default class Interaction {
   onMouseMove(event) {
     event.preventDefault();
 
-    setTimeout(function() {
+    clearTimeout(this.timeout);
+
+    this.timeout = setTimeout(function() {
       Config.isMouseMoving = false;
     }, 200);
 

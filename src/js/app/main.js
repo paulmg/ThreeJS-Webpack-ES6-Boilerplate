@@ -22,13 +22,13 @@ import DatGUI from './managers/datGUI';
 
 // data
 import Config from './../data/config';
-// -- End imports
+// -- End of imports
 
 // Local vars for rStats
 let rS, bS, glS, tS;
 
 
-// This is the main class that ties all of the components together and renders the loop
+// This class instantiates and ties all of the components together, starts the loading process and renders the main loop
 export default class Main {
   constructor(container) {
     // Set container property to container element
@@ -41,7 +41,7 @@ export default class Main {
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.FogExp2(Config.fog.color, Config.fog.near);
 
-    // Get Device Pixel Ratio first
+    // Get Device Pixel Ratio first for retina
     if(window.devicePixelRatio) {
       Config.dpr = window.devicePixelRatio;
     }
@@ -62,7 +62,7 @@ export default class Main {
 
     // Create and place geo in scene
     this.geometry = new Geometry(this.scene);
-    this.geometry.make('plane')(100, 100, 10, 10);
+    this.geometry.make('plane')(150, 150, 10, 10);
     this.geometry.place([0, -20, 0], [Math.PI/2, 0, 0]);
 
     // Set up rStats if dev environment
@@ -72,7 +72,7 @@ export default class Main {
       tS = new threeStats(this.renderer.threeRenderer);
 
       rS = new rStats({
-        CSSPath: '/assets/css/',
+        CSSPath: './assets/css/',
         userTimingAPI: true,
         values: {
           frame: { caption: 'Total frame time (ms)', over: 16, average: true, avgMs: 100 },
@@ -96,7 +96,7 @@ export default class Main {
     // Instantiate texture class
     this.texture = new Texture();
 
-    // Start loading the textures
+    // Start loading the textures and then go on to load the model after the texture Promises have resolved
     this.texture.load().then(() => {
       this.manager = new THREE.LoadingManager();
 
@@ -104,23 +104,24 @@ export default class Main {
       this.model = new Model(this.scene, this.manager, this.texture.textures);
       this.model.load();
 
-      // onProgress
+      // onProgress callback
       this.manager.onProgress = (item, loaded, total) => {
         console.log(`${item}: ${loaded} ${total}`);
       };
 
-      // All loaders done
+      // All loaders done now
       this.manager.onLoad = () => {
-        // Set up interaction manager with app now that the model is finished loading
+        // Set up interaction manager with the app now that the model is finished loading
         new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls);
 
-        // Add dat.GUI controls if dev as helper
+        // Add dat.GUI controls if dev
         if(Config.isDev) {
           new DatGUI(this, this.model.obj);
         }
 
-        // Fully loaded
+        // Everything is now fully loaded
         Config.isLoaded = true;
+        this.container.querySelector('#loading').style.display = 'none';
       };
     });
 
@@ -129,8 +130,6 @@ export default class Main {
   }
 
   render() {
-    const delta = this.clock.getDelta();
-
     // Render rStats if Dev
     if(Config.isDev) {
       rS('frame').start();
@@ -142,20 +141,24 @@ export default class Main {
       rS('render').start();
     }
 
-    // Clear renderer and re-render
-    this.renderer.threeRenderer.clear();
+    // Call render function and pass in created scene and camera
     this.renderer.render(this.scene, this.camera.threeCamera);
 
+    // rStats has finished determining render call now
     if(Config.isDev) {
       rS('render').end(); // render finished
       rS('frame').end(); // frame finished
 
+      // Local rStats update
       rS('rStats').start();
       rS().update();
       rS('rStats').end();
     }
 
-    // Updates section
+    // Delta time is sometimes needed for certain updates
+    //const delta = this.clock.getDelta();
+
+    // Call any vendor or module updates here
     TWEEN.update();
     this.controls.threeControls.update();
 

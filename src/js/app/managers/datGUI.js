@@ -144,7 +144,7 @@ export default class DatGUI {
     shadowFolder.add(Config.shadow, 'helperEnabled').name('Helper Enabled').onChange((value) => {
       this.light.directionalLightHelper.visible = value;
     });
-    const shadowNearGui = shadowFolder.add(Config.shadow, 'near', 0, 100).name('Near');
+    const shadowNearGui = shadowFolder.add(Config.shadow, 'near', 0, 400).name('Near');
     shadowNearGui.onChange((value) => {
       this.controls.enableRotate = false;
 

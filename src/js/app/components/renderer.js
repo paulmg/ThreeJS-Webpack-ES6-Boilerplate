@@ -4,29 +4,27 @@ import Config from '../../data/config';
 
 export default class Renderer {
   constructor(scene, container) {
+    // Properties
     this.scene = scene;
     this.container = container;
 
+    // Create WebGL renderer and set its antialias
     this.threeRenderer = new THREE.WebGLRenderer({antialias: true});
 
-    //this.renderer.setClearColor(0x000000, 0);
+    // Set clear color to fog to enable fog or to color
     this.threeRenderer.setClearColor(scene.fog.color);
-    this.threeRenderer.setPixelRatio(window.devicePixelRatio);
+    this.threeRenderer.setPixelRatio(window.devicePixelRatio); // For retina
 
     container.appendChild(this.threeRenderer.domElement);
 
-    this.threeRenderer.gammaInput = true;
-    this.threeRenderer.gammaOutput = true;
-
-    // shadow
+    // Shadow map options
     this.threeRenderer.shadowMap.enabled = true;
     this.threeRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.threeRenderer.shadowMapSoft = true;
 
-    this.threeRenderer.autoClear = false;
-
+    // Get anisotropy for textures
     Config.maxAnisotropy = this.threeRenderer.getMaxAnisotropy();
 
+    // Initial size update set to canvas container
     this.updateSize();
 
     // Listeners
@@ -39,6 +37,7 @@ export default class Renderer {
   }
 
   render(scene, camera) {
+    // Renders scene to canvas target
     this.threeRenderer.render(scene, camera);
   }
 }

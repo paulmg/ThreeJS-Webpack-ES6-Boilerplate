@@ -2,7 +2,7 @@ import Config from './data/config';
 import Detector from './utils/detector';
 import Main from './app/main';
 
-// verify environment.
+// Check environment and set the Config helper
 if(__ENV__ == 'dev') {
   console.log('----- RUNNING IN DEV ENVIRONMENT! -----');
 
@@ -10,6 +10,7 @@ if(__ENV__ == 'dev') {
 }
 
 function init() {
+  // Check for webGL capabilities
   if(!Detector.webgl) {
     Detector.addGetWebGLMessage();
   } else {
@@ -18,4 +19,4 @@ function init() {
   }
 }
 
-window.onload = init;
+init();

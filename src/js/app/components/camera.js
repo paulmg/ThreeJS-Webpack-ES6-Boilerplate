@@ -12,11 +12,12 @@ export default class Camera {
 
     this.updateSize(renderer);
     
-    // listeners
+    // Listeners
     window.addEventListener('resize', () => this.updateSize(renderer), false);
   }
 
   updateSize(renderer) {
+    // Multiply by dpr in case it is retina device
     this.threeCamera.aspect = renderer.domElement.width * Config.dpr / renderer.domElement.height * Config.dpr;
     this.threeCamera.updateProjectionMatrix();
   }

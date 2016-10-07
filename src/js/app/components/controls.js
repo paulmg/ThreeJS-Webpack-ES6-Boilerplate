@@ -5,6 +5,7 @@ import Config from '../../data/config';
 
 export default class Controls {
   constructor(camera, container) {
+    // Orbit controls first needs to pass in THREE to constructor
     const orbitControls = new OrbitControls(THREE);
     this.threeControls = new orbitControls(camera, container);
 
