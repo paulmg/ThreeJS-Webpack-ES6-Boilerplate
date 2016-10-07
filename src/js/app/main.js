@@ -1,32 +1,43 @@
-// global imports
-import THREE from 'three';
+// Global imports -
+import * as THREE from 'three';
 import TWEEN from 'tween.js';
 
-// local imports
-import Renderer from './renderer';
-import Camera from './camera';
-import Light from './light';
-import Controls from './controls';
-import Geometry from './geometry';
-import Texture from './texture';
-import Model from './model';
-import Interaction from './interaction';
-import GUI from './gui';
+// Local imports -
+// Components
+import Renderer from './components/renderer';
+import Camera from './components/camera';
+import Light from './components/light';
+import Controls from './components/controls';
+
+// Helpers
+import Geometry from './helpers/geometry';
+
+// Model
+import Texture from './model/texture';
+import Model from './model/model';
+
+// Managers
+import Interaction from './managers/interaction';
+import DatGUI from './managers/datGUI';
 
 // data
 import Config from './../data/config';
+// -- End imports
 
-// stats
+// Local vars for rStats
 let rS, bS, glS, tS;
 
+
+// This is the main class that ties all of the components together and renders the loop
 export default class Main {
   constructor(container) {
+    // Set container property to container element
     this.container = container;
 
     // Start Three clock
     this.clock = new THREE.Clock();
 
-    // Main scene
+    // Main scene creation
     this.scene = new THREE.Scene();
     this.scene.fog = new THREE.FogExp2(Config.fog.color, Config.fog.near);
 
@@ -35,26 +46,26 @@ export default class Main {
       Config.dpr = window.devicePixelRatio;
     }
 
-    // Main renderer
-    this.renderer = new Renderer(container, this.scene);
+    // Main renderer instantiation
+    this.renderer = new Renderer(this.scene, container);
 
-    // Components
+    // Components instantiation
     this.camera = new Camera(this.renderer.threeRenderer);
-    this.controls = new Controls(this.camera.threeCamera, this.container);
+    this.controls = new Controls(this.camera.threeCamera, container);
     this.light = new Light(this.scene);
 
-    // Place lights
+    // Create and place lights in scene
     const lights = ['ambient', 'directional', 'point', 'hemi'];
     for(let i = 0; i < lights.length; i++) {
       this.light.place(lights[i]);
     }
 
-    // Place geo
+    // Create and place geo in scene
     this.geometry = new Geometry(this.scene);
     this.geometry.make('plane')(100, 100, 10, 10);
     this.geometry.place([0, -20, 0], [Math.PI/2, 0, 0]);
 
-    // Set up stats if dev
+    // Set up rStats if dev environment
     if(Config.isDev) {
       bS = new BrowserStats();
       glS = new glStats();
@@ -82,11 +93,14 @@ export default class Main {
       });
     }
 
+    // Instantiate texture class
     this.texture = new Texture();
+
     // Start loading the textures
     this.texture.load().then(() => {
       this.manager = new THREE.LoadingManager();
-      // Textures loaded, load main model
+
+      // Textures loaded, load model
       this.model = new Model(this.scene, this.manager, this.texture.textures);
       this.model.load();
 
@@ -97,23 +111,27 @@ export default class Main {
 
       // All loaders done
       this.manager.onLoad = () => {
-        // Set up interaction with app
+        // Set up interaction manager with app now that the model is finished loading
         new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls);
 
+        // Add dat.GUI controls if dev as helper
         if(Config.isDev) {
-          new GUI(this, this.model.obj);
+          new DatGUI(this, this.model.obj);
         }
 
+        // Fully loaded
         Config.isLoaded = true;
       };
     });
 
+    // Start render which does not wait for model fully loaded
     this.render();
   }
 
   render() {
     const delta = this.clock.getDelta();
 
+    // Render rStats if Dev
     if(Config.isDev) {
       rS('frame').start();
       glS.start();
@@ -124,24 +142,24 @@ export default class Main {
       rS('render').start();
     }
 
-    // Clear renderer
+    // Clear renderer and re-render
     this.renderer.threeRenderer.clear();
     this.renderer.render(this.scene, this.camera.threeCamera);
 
     if(Config.isDev) {
-      rS('render').end();
-      rS('frame').end();
+      rS('render').end(); // render finished
+      rS('frame').end(); // frame finished
 
       rS('rStats').start();
       rS().update();
       rS('rStats').end();
     }
 
-    // Updates
+    // Updates section
     TWEEN.update();
     this.controls.threeControls.update();
 
-    // raf
-    requestAnimationFrame(this.render.bind(this));
+    // RAF
+    requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
   }
 }
