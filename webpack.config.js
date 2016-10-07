@@ -1,13 +1,17 @@
+// Global imports
 var webpack = require('webpack'),
     path    = require('path');
 
+// Paths
 var entry           = './src/js/app.js',
     includePath     = path.join(__dirname, 'src/js'),
     nodeModulesPath = path.join(__dirname, 'node_modules'),
     outputPath      = path.join(__dirname, 'src/public/assets/js');
 
+// Environment
 var PROD = JSON.parse(process.env.NODE_ENV || 0);
 
+// Dev environment
 var env     = 'dev',
     time    = Date.now(),
     devtool = 'eval',
@@ -20,6 +24,7 @@ var env     = 'dev',
       })
     ];
 
+// Production environment
 if(PROD) {
   env = 'prod';
   devtool = 'hidden-source-map';
@@ -48,25 +53,19 @@ module.exports = {
   stats: {
     colors: true
   },
-
   debug: debug,
-
   devtool: devtool,
-
   devServer: {
     contentBase: 'src/public'
   },
-
   entry: [
     entry
   ],
-
   output: {
     path: outputPath,
     publicPath: 'assets/js',
     filename: 'app.js'
   },
-
   module: {
     loaders: [
       {
@@ -81,15 +80,5 @@ module.exports = {
       }
     ]
   },
-
-  sassLoader: {
-    outputStyle: 'compressed',
-    outFile: __dirname + '/src/public/assets/css'
-  },
-
-  plugins: plugins,
-
-  resolve: {
-    alias: {}
-  }
+  plugins: plugins
 };
