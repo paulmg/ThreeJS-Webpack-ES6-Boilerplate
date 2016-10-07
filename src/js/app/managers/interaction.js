@@ -2,6 +2,7 @@ import Keyboard from '../../utils/keyboard';
 import Helpers from '../../utils/helpers';
 import Config from '../../data/config';
 
+// Manages all input interactions
 export default class Interaction {
   constructor(renderer, scene, camera, controls) {
     // Properties

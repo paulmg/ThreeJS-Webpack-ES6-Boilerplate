@@ -5,12 +5,13 @@ import { Promise } from 'es6-promise';
 import Helpers from '../../utils/helpers';
 import Config from '../../data/config';
 
-// This class preloads all textures in the imageFiles array in Config via ES6 Promises.
-// Once all textures are done loading the model itself will be loaded with the Promise .then() callback.
-// Using promises to preload textures prevents issues of loading and applying textures to materials
+// This class preloads all textures in the imageFiles array in the Config via ES6 Promises.
+// Once all textures are done loading the model itself will be loaded after the Promise .then() callback.
+// Using promises to preload textures prevents issues when applying textures to materials
 // before the textures have loaded.
 export default class Texture {
   constructor() {
+    // Prop that will contain all loaded textures
     this.textures = {};
   }
 
@@ -18,7 +19,6 @@ export default class Texture {
     const loader = new THREE.TextureLoader();
     const maxAnisotropy = Config.maxAnisotropy;
     const imageFiles = Config.texture.imageFiles;
-
     const promiseArray = [];
 
     loader.setPath(Config.texture.path);

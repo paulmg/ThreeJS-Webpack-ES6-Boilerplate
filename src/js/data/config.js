@@ -1,6 +1,6 @@
 import TWEEN from 'tween.js';
 
-// This object contains most of the configurable options and state of the app
+// This object contains the state of the app
 export default {
   isDev: false,
   isLoaded: false,
