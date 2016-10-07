@@ -1,5 +1,6 @@
 import TWEEN from 'tween.js';
 
+// This object contains most of the configurable options and state of the app
 export default {
   isDev: false,
   isLoaded: false,
@@ -78,15 +79,15 @@ export default {
   shadow: {
     enabled: true,
     helperEnabled: true,
-    bias: -0.00025,
-    mapWidth: 1024,
-    mapHeight: 1024,
-    near: 200,
+    bias: 0,
+    mapWidth: 2048,
+    mapHeight: 2048,
+    near: 250,
     far: 400,
-    top: 150,
-    right: 150,
-    bottom: -150,
-    left: -150
+    top: 100,
+    right: 100,
+    bottom: -100,
+    left: -100
   },
   pointLight: {
     enabled: true,
@@ -101,9 +102,9 @@ export default {
     enabled: true,
     color: 0xc8c8c8,
     groundColor: 0xffffff,
-    intensity: 0.3,
-    x: -275,
-    y: 145,
+    intensity: 0.55,
+    x: 0,
+    y: 0,
     z: 0
   }
 };
