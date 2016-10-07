@@ -1,7 +1,7 @@
-import THREE from 'three';
+import * as THREE from 'three';
 import { Promise } from 'es6-promise';
 
-import Config from './../data/config';
+import Config from '../../data/config';
 
 export default class Texture {
   constructor() {
@@ -13,7 +13,7 @@ export default class Texture {
     const maxAnisotropy = Config.maxAnisotropy;
     const imageFiles = Config.texture.imageFiles;
 
-    let promiseArray = [];
+    const promiseArray = [];
 
     loader.setPath(Config.texture.path);
 
@@ -30,7 +30,7 @@ export default class Texture {
               resolve(modelOBJ);
           },
           function(xhr) {
-            console.log(( xhr.loaded / xhr.total * 100 ) + '% loaded');
+            console.log(xhr.loaded / xhr.total * 100 + '% loaded');
           },
           function(xhr) {
             reject(new Error(xhr + 'An error occurred loading while loading ' + imageFile.image));

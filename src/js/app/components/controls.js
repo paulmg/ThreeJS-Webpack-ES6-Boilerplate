@@ -1,7 +1,7 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import OrbitControls from '../utils/orbitControls';
-import Config from './../data/config';
+import OrbitControls from '../../utils/orbitControls';
+import Config from '../../data/config';
 
 export default class Controls {
   constructor(camera, container) {

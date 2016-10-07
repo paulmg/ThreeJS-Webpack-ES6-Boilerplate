@@ -1,6 +1,6 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import Config from './../data/config';
+import Config from '../../data/config';
 
 export default class Light {
   constructor(scene) {

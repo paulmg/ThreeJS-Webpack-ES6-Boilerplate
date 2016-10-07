@@ -1,8 +1,8 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import Material from './material';
-import Helper from './helper';
-import Config from './../data/config';
+import Material from '../helpers/material';
+import Helper from '../helpers/helper';
+import Config from '../../data/config';
 
 export default class Model {
   constructor(scene, manager, textures) {
@@ -18,7 +18,7 @@ export default class Model {
     this.loader.load(Config.model.path, (obj) => {
       obj.traverse((child) => {
         if(child instanceof THREE.Mesh) {
-          let material = new Material().standard;
+          const material = new Material().standard;
           material.map = this.textures.UV;
           child.material = material;
 
@@ -45,13 +45,13 @@ export default class Model {
 
   static onProgress(xhr) {
     if(xhr.lengthComputable) {
-      let percentComplete = xhr.loaded / xhr.total * 100;
+      const percentComplete = xhr.loaded / xhr.total * 100;
 
       console.log(Math.round(percentComplete, 2) + '% downloaded');
     }
-  };
+  }
 
   static onError(xhr) {
     console.error(xhr);
-  };
+  }
 }

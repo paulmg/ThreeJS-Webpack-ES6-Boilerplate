@@ -1,6 +1,6 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import Config from '../data/config';
+import Config from '../../data/config';
 
 export default class Geometry {
   constructor(scene) {
@@ -12,7 +12,7 @@ export default class Geometry {
     if(type == 'plane') {
       return (width, height, widthSegments = 1, heightSegments = 1) => {
         this.geo = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
-      }
+      };
     }
   }
 

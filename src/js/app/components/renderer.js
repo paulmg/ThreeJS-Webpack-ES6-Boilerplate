@@ -1,11 +1,11 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import Config from './../data/config';
+import Config from '../../data/config';
 
 export default class Renderer {
-  constructor(container, scene) {
-    this.container = container;
+  constructor(scene, container) {
     this.scene = scene;
+    this.container = container;
 
     this.threeRenderer = new THREE.WebGLRenderer({antialias: true});
 

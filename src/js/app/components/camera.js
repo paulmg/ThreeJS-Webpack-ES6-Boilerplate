@@ -1,6 +1,6 @@
-import THREE from 'three';
+import * as THREE from 'three';
 
-import Config from './../data/config';
+import Config from '../../data/config';
 
 export default class Camera {
   constructor(renderer) {
@@ -17,7 +17,7 @@ export default class Camera {
   }
 
   updateSize(renderer) {
-    this.threeCamera.aspect = (renderer.domElement.width * Config.dpr) / (renderer.domElement.height * Config.dpr);
+    this.threeCamera.aspect = renderer.domElement.width * Config.dpr / renderer.domElement.height * Config.dpr;
     this.threeCamera.updateProjectionMatrix();
   }
 }
