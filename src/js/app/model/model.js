@@ -21,8 +21,8 @@ export default class Model {
     this.loader.load(Config.model.path, obj => {
       obj.traverse(child => {
         if(child instanceof THREE.Mesh) {
-          // Create material for mesh and grab texture by name from preloaded textures
-          const material = new Material().standard;
+          // Create material for mesh and set its map to texture by name from preloaded textures
+          const material = new Material(0xffffff).standard;
           material.map = this.textures.UV;
           child.material = material;
 
