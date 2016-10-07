@@ -4,8 +4,6 @@ const ALIAS = {
   'right'		: 39,
   'down'		: 40,
   'space'		: 32,
-  'pageup'	: 33,
-  'pagedown': 34,
   'tab'		  : 9,
   'escape'	: 27
 };
