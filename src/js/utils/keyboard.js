@@ -32,7 +32,7 @@ export default class Keyboard {
   }
 
   onBlur() {
-    for(let prop in this.keyCodes)
+    for(const prop in this.keyCodes)
       this.keyCodes[prop] = false;
   }
 
@@ -41,14 +41,14 @@ export default class Keyboard {
     //console.log('onKeyChange', event, event.keyCode, event.shiftKey, event.ctrlKey, event.altKey, event.metaKey)
 
     // update this.keyCodes
-    let keyCode = event.keyCode;
+    const keyCode = event.keyCode;
     this.keyCodes[keyCode] = event.type === 'keydown';
   }
 
   pressed(keyDesc) {
-    let keys = keyDesc.split('+');
+    const keys = keyDesc.split('+');
     for(let i = 0; i < keys.length; i++) {
-      let key = keys[i];
+      const key = keys[i];
       let pressed = false;
       if(Object.keys(ALIAS).indexOf(key) != -1) {
         pressed = this.keyCodes[ALIAS[key]];
@@ -63,24 +63,24 @@ export default class Keyboard {
   }
 
   eventMatches(event, keyDesc) {
-    let aliases = ALIAS;
-    let aliasKeys = Object.keys(aliases);
-    let keys = keyDesc.split('+');
+    const aliases = ALIAS;
+    const aliasKeys = Object.keys(aliases);
+    const keys = keyDesc.split('+');
     // log to debug
     // console.log('eventMatches', event, event.keyCode, event.shiftKey, event.ctrlKey, event.altKey, event.metaKey)
     for(let i = 0; i < keys.length; i++) {
-      let key = keys[i];
+      const key = keys[i];
       let pressed = false;
       if(key === 'shift') {
-        pressed = (event.shiftKey ? true : false);
+        pressed = event.shiftKey ? true : false;
       } else if(key === 'ctrl') {
-        pressed = (event.ctrlKey ? true : false);
+        pressed = event.ctrlKey ? true : false;
       } else if(key === 'alt') {
-        pressed = (event.altKey ? true : false);
+        pressed = event.altKey ? true : false;
       } else if(key === 'meta') {
-        pressed = (event.metaKey ? true : false);
+        pressed = event.metaKey ? true : false;
       } else if(aliasKeys.indexOf(key) !== -1) {
-        pressed = (event.keyCode === aliases[key]);
+        pressed = event.keyCode === aliases[key];
       } else if(event.keyCode === key.toUpperCase().charCodeAt(0)) {
         pressed = true;
       }

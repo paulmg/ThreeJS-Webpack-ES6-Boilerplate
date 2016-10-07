@@ -1,16 +1,15 @@
 export default class Helpers {
   static throttle(fn, threshhold, scope) {
     threshhold || (threshhold = 250);
-    var last, deferTimer;
+    let last, deferTimer;
 
     return function() {
-      var context = scope || this;
+      const context = scope || this;
 
-      var now  = +new Date,
+      const now  = +new Date,
           args = arguments;
 
       if(last && now < last + threshhold) {
-        // hold on to it
         clearTimeout(deferTimer);
         deferTimer = setTimeout(function() {
           last = now;
