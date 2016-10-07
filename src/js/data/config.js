@@ -12,11 +12,11 @@ export default {
   easing: TWEEN.Easing.Quadratic.InOut,
   duration: 500,
   model: {
-    path: '/assets/models/teapot-claraio.json',
+    path: './assets/models/Teapot.json',
     scale: 20
   },
   texture: {
-    path: '/assets/textures/',
+    path: './assets/textures/',
     imageFiles: [
       {name: 'UV', image: 'UV_Grid_Sm.jpg'}
     ]
