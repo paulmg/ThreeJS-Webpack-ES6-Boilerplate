@@ -50,7 +50,7 @@ You can run any of these individually if you'd like with the npm run command:
 * build:js - Run webpack in production environment
 
 ## Input Controls
-Press H to hide dat.GUI
-Arrow controls will pan
-Mouse left click will rotate/right click will pan
-Scrollwheel zooms in and out
+* Press H to hide dat.GUI
+* Arrow controls will pan
+* Mouse left click will rotate/right click will pan
+* Scrollwheel zooms in and out
