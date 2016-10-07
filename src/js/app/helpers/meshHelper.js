@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export default class Helper {
+export default class MeshHelper {
   constructor(scene, mesh) {
     const wireframe = new THREE.WireframeGeometry(mesh.geometry);
     const wireLine = new THREE.LineSegments(wireframe);
