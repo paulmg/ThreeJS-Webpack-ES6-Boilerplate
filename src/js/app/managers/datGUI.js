@@ -1,5 +1,6 @@
 import Config from '../../data/config';
 
+// Manages all dat.GUI interactions
 export default class DatGUI {
   constructor(main, mesh) {
     const gui = new dat.GUI();
@@ -332,38 +333,5 @@ export default class DatGUI {
     hemiLightPositionZGui.onFinishChange(() => {
       this.controls.enableRotate = true;
     });
-  }
-
-  handleColorChange(color) {
-    return (value) => {
-      if(typeof value === 'string') {
-        value = value.replace('#', '0x');
-      }
-
-      color.setHex(value);
-    };
-  }
-
-  needsUpdate(material, geometry) {
-    return function() {
-      material.shading = +material.shading; //Ensure number
-      material.vertexColors = +material.vertexColors; //Ensure number
-      material.side = +material.side; //Ensure number
-      material.needsUpdate = true;
-      geometry.verticesNeedUpdate = true;
-      geometry.normalsNeedUpdate = true;
-      geometry.colorsNeedUpdate = true;
-    };
-  }
-
-  updateTexture(material, materialKey, textures) {
-    return function(key) {
-      material[materialKey] = textures[key];
-      material.needsUpdate = true;
-    };
-  }
-
-  update(mesh) {
-    this.needsUpdate(mesh.material, mesh.geometry);
   }
 }
