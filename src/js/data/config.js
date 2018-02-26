@@ -3,6 +3,7 @@ import TWEEN from 'tween.js';
 // This object contains the state of the app
 export default {
   isDev: false,
+  isShowingStats: true,
   isLoaded: false,
   isTweening: false,
   isRotating: true,

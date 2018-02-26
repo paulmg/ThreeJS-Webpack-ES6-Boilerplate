@@ -32,6 +32,32 @@
 
 } )();
 
+/**
+ * @class rStats
+ * @param {rStats~Settings} [settings] Settings for the rStats instance.
+ */
+
+/**
+ * @typedef {Object} rStats~Settings
+ * @property {Array.<String>} [colours] An array of CSS colour values.
+ * @property {String} [CSSPath=''] Base URL where rStats.css is located.
+ * @property {Array.<String>} [css] URLs of CSS or font files to import.
+ * @property {Object.<String, rStats~CounterProperties>} [values] Properties to use for each counter.
+ * @property {Array.<Object>} [groups] Define groups of counters.
+ * @property {Array.<Object>} [fractions] Define stacked counters.
+ * @property {Array.<Object>} [plugins] Additional plugins.
+ */
+
+/**
+ * @typedef {Object} rStats~CounterProperties
+ * @property {String} [caption] Caption for this counter.
+ * @property {Boolean} [average=false] Whether the values should be averaged.
+ * @property {Number} [avgMs=1000] Duration for which the values should be averaged.
+ * @property {Number} [below] Value below which the graph should be highlighted.
+ * @property {Number} [over] Value over which the graph should be highlighted.
+ * @property {Boolean} [interpolate=true] Whether framerate should be interpolated.
+ */
+
 window.rStats = function rStats ( settings ) {
 
   function iterateKeys ( array, callback ) {
@@ -194,8 +220,6 @@ window.rStats = function rStats ( settings ) {
         _graph = new Graph( _dom, _id, _def ),
         _started = false;
 
-    _dom.className = 'rs-counter-base';
-
     _spanId.className = 'rs-counter-id';
     _spanId.textContent = ( _def && _def.caption ) ? _def.caption : _id;
 
@@ -250,7 +274,8 @@ window.rStats = function rStats ( settings ) {
       _spanValueText.nodeValue = Math.round( v * 100 ) / 100;
       var a = ( _def && ( ( _def.below && _value < _def.below ) || ( _def.over && _value > _def.over ) ) );
       _graph.draw( _value, a );
-      _dom.style.color = a ? '#b70000' : '#ffffff';
+      _dom.className = a ? 'rs-counter-base alarm' : 'rs-counter-base';
+
     }
 
     function _frame () {
@@ -429,10 +454,10 @@ window.rStats = function rStats ( settings ) {
     }
 
     /*if( _height != _div.clientHeight ) {
-     _height = _div.clientHeight;
-     _base.style.height = _height + 2 * _elHeight + 'px';
-     console.log( _base.clientHeight );
-     }*/
+        _height = _div.clientHeight;
+        _base.style.height = _height + 2 * _elHeight + 'px';
+    console.log( _base.clientHeight );
+    }*/
 
   }
 

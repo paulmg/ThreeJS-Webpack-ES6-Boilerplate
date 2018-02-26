@@ -11,6 +11,7 @@ import Controls from './components/controls';
 
 // Helpers
 import Geometry from './helpers/geometry';
+import Stats from './helpers/stats';
 
 // Model
 import Texture from './model/texture';
@@ -23,10 +24,6 @@ import DatGUI from './managers/datGUI';
 // data
 import Config from './../data/config';
 // -- End of imports
-
-// Local vars for rStats
-let rS, bS, glS, tS;
-
 
 // This class instantiates and ties all of the components together, starts the loading process and renders the main loop
 export default class Main {
@@ -46,51 +43,27 @@ export default class Main {
       Config.dpr = window.devicePixelRatio;
     }
 
-    // Main renderer instantiation
+    // Main renderer constructor
     this.renderer = new Renderer(this.scene, container);
 
-    // Components instantiation
+    // Components instantiations
     this.camera = new Camera(this.renderer.threeRenderer);
     this.controls = new Controls(this.camera.threeCamera, container);
     this.light = new Light(this.scene);
 
     // Create and place lights in scene
     const lights = ['ambient', 'directional', 'point', 'hemi'];
-    for(let i = 0; i < lights.length; i++) {
-      this.light.place(lights[i]);
-    }
+    lights.forEach((light) => this.light.place(light));
 
     // Create and place geo in scene
     this.geometry = new Geometry(this.scene);
     this.geometry.make('plane')(150, 150, 10, 10);
-    this.geometry.place([0, -20, 0], [Math.PI/2, 0, 0]);
+    this.geometry.place([0, -20, 0], [Math.PI / 2, 0, 0]);
 
     // Set up rStats if dev environment
-    if(Config.isDev) {
-      bS = new BrowserStats();
-      glS = new glStats();
-      tS = new threeStats(this.renderer.threeRenderer);
-
-      rS = new rStats({
-        CSSPath: './assets/css/',
-        userTimingAPI: true,
-        values: {
-          frame: { caption: 'Total frame time (ms)', over: 16, average: true, avgMs: 100 },
-          fps: { caption: 'Framerate (FPS)', below: 30 },
-          calls: { caption: 'Calls (three.js)', over: 3000 },
-          raf: { caption: 'Time since last rAF (ms)', average: true, avgMs: 100 },
-          rstats: { caption: 'rStats update (ms)', average: true, avgMs: 100 },
-          texture: { caption: 'GenTex', average: true, avgMs: 100 }
-        },
-        groups: [
-          { caption: 'Framerate', values: [ 'fps', 'raf' ] },
-          { caption: 'Frame Budget', values: [ 'frame', 'texture', 'setup', 'render' ] }
-        ],
-        fractions: [
-          { base: 'frame', steps: [ 'texture', 'setup', 'render' ] }
-        ],
-        plugins: [bS, tS, glS]
-      });
+    if(Config.isDev && Config.isShowingStats) {
+      this.stats = new Stats(this.renderer);
+      this.stats.setUp();
     }
 
     // Instantiate texture class
@@ -131,34 +104,22 @@ export default class Main {
 
   render() {
     // Render rStats if Dev
-    if(Config.isDev) {
-      rS('frame').start();
-      glS.start();
-
-      rS('rAF').tick();
-      rS('FPS').frame();
-
-      rS('render').start();
+    if(Config.isDev && Config.isShowingStats) {
+      Stats.start();
     }
 
     // Call render function and pass in created scene and camera
     this.renderer.render(this.scene, this.camera.threeCamera);
 
     // rStats has finished determining render call now
-    if(Config.isDev) {
-      rS('render').end(); // render finished
-      rS('frame').end(); // frame finished
-
-      // Local rStats update
-      rS('rStats').start();
-      rS().update();
-      rS('rStats').end();
+    if(Config.isDev && Config.isShowingStats) {
+      Stats.end();
     }
 
     // Delta time is sometimes needed for certain updates
     //const delta = this.clock.getDelta();
 
-    // Call any vendor or module updates here
+    // Call any vendor or module frame updates here
     TWEEN.update();
     this.controls.threeControls.update();
 
