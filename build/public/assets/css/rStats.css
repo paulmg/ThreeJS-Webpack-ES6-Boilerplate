@@ -1,86 +1,87 @@
-.alarm {
+.alarm{
   color: #b70000;
   text-shadow: 0 0 0 #b70000,
-  0 0 1px #ffffff,
-  0 0 1px #ffffff,
-  0 0 2px #ffffff,
-  0 0 2px #ffffff,
-  0 0 3px #ffffff,
-  0 0 3px #ffffff,
-  0 0 4px #ffffff,
-  0 0 4px #ffffff;
+  0 0 1px #fff,
+  0 0 1px #fff,
+  0 0 2px #fff,
+  0 0 2px #fff,
+  0 0 3px #fff,
+  0 0 3px #fff,
+  0 0 4px #fff,
+  0 0 4px #fff;
 }
 
-.rs-base {
+.rs-base{
   position: absolute;
-  top: 0;
-  left: 0;
   z-index: 10000;
-  overflow: hidden;
   padding: 10px;
-  width: 350px;
-  background-color: #222222;
+  background-color: #222;
   font-size: 10px;
-  font-family: 'Roboto Condensed', tahoma, sans-serif;
   line-height: 1.2em;
+  width: 350px;
+  font-family: 'Roboto Condensed', tahoma, sans-serif;
+  left: 0;
+  top: 0;
+  overflow: hidden;
 }
 
-.rs-base h1 {
+.rs-base h1{
   margin: 0;
-  margin-bottom: 5px;
   padding: 0;
-  color: #ffffff;
   font-size: 1.4em;
+  color: #fff;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
-.rs-base div.rs-group {
+.rs-base div.rs-group{
   margin-bottom: 10px;
 }
 
-.rs-base div.rs-group.hidden {
+.rs-base div.rs-group.hidden{
   display: none;
 }
 
-.rs-base div.rs-fraction {
+.rs-base div.rs-fraction{
   position: relative;
   margin-bottom: 5px;
 }
 
-.rs-base div.rs-fraction p {
-  margin: 0;
-  padding: 0;
+.rs-base div.rs-fraction p{
   width: 120px;
   text-align: right;
+  margin: 0;
+  padding: 0;
 }
 
-.rs-base div.rs-legend {
+.rs-base div.rs-legend{
   position: absolute;
   line-height: 1em;
 }
 
-.rs-base div.rs-counter-base {
+.rs-base div.rs-counter-base{
   position: relative;
   margin: 2px 0;
   height: 1em;
+  color: white;
 }
 
-.rs-base span.rs-counter-id {
+.rs-base span.rs-counter-id{
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
 }
 
-.rs-base div.rs-counter-value {
+.rs-base div.rs-counter-value{
   position: absolute;
-  top: 0;
   left: 90px;
   width: 30px;
   height: 1em;
+  top: 0;
   text-align: right;
 }
 
-.rs-base canvas.rs-canvas {
+.rs-base canvas.rs-canvas{
   position: absolute;
   right: 0;
 }
