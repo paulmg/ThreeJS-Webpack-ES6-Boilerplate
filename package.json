@@ -14,7 +14,7 @@
     "webpack-watch": "set NODE_ENV=0&& webpack --progress --color --watch --hot",
     "dev:sass": "node-sass -w -r src/css/ -o src/public/assets/css/",
     "dev:js": "set NODE_ENV=0&& webpack",
-    "build:dir": "copyfiles -u 1 src/public/**/* build/",
+    "build:dir": "copyfiles -u 1 'src/public/**/*' build/",
     "build:sass": "node-sass --output-style compressed src/css/ -o build/public/assets/css/",
     "build:js": "set NODE_ENV=1&& webpack --progress --color"
   },
