@@ -14,16 +14,16 @@ export default class Keyboard {
     this.keyCodes = {};
 
     // bind keyEvents
-    this.domElement.addEventListener('keydown', () => this.onKeyChange(event), false);
-    this.domElement.addEventListener('keyup', () => this.onKeyChange(event), false);
+    this.domElement.addEventListener('keydown', (event) => this.onKeyChange(event), false);
+    this.domElement.addEventListener('keyup', (event) => this.onKeyChange(event), false);
 
     // bind window blur
     window.addEventListener('blur', () => this.onBlur, false);
   }
 
   destroy() {
-    this.domElement.removeEventListener('keydown', () => this.onKeyChange(event), false);
-    this.domElement.removeEventListener('keyup', () => this.onKeyChange(event), false);
+    this.domElement.removeEventListener('keydown', (event) => this.onKeyChange(event), false);
+    this.domElement.removeEventListener('keyup', (event) => this.onKeyChange(event), false);
 
     // unbind window blur event
     window.removeEventListener('blur', () => this.onBlur, false);
