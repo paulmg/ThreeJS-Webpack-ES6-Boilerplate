@@ -2,17 +2,20 @@
 A basic boilerplate for a Three.js project including the use of Webpack and ES6 syntax via Babel.
 
 ## Project Structure
-* build - Directory for built and compressed files from the npm build script
-* src - Directory for all dev files
-* src/css - Contains all SCSS files, that are compiled to `src/public/assets/css`
-* src/js - All the Three.js app files, with `app.js` as entry point. Compiled to `src/public/assets/js` with webpack
-* src/js/app/components - Three.js components that get initialized in `main.js`
-* src/js/app/helpers - Classes that provide ideas on how to set up and work with defaults
-* src/js/app/managers - Manage complex tasks such as GUI or input
-* src/js/app/model - Classes that set up the model object
-* src/js/data - Any data to be imported into app
-* src/js/utils - Various helpers and vendor classes
-* src/public - Used by webpack-dev-server to serve content and is copied over to build folder with build command. Place external vendor files here.
+```
+build - Directory for built and compressed files from the npm build script
+src - Directory for all dev files
+├── css - Contains all SCSS files, that are compiled to `src/public/assets/css`
+├── js - All the Three.js app files, with `app.js` as entry point. Compiled to `src/public/assets/js` with webpack
+│   ├── app
+│   │   ├── components - Three.js components that get initialized in `main.js`
+│   │   ├── helpers - Classes that provide ideas on how to set up and work with defaults
+│   │   ├── managers - Manage complex tasks such as GUI or input
+│   │   └── model - Classes that set up the model object
+│   ├── data - Any data to be imported into app
+│   └── utils - Various helpers and vendor classes
+└── public - Used by webpack-dev-server to serve content and is copied over to build folder with build command. Place external vendor files here.
+```
 
 ## Getting started
 Install dependencies:
