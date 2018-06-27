@@ -39,7 +39,7 @@ export default class Model {
         new MeshHelper(this.scene, obj);
       }
 
-      // Set prop to obj
+      // Set prop to obj so it can be accessed from outside the class
       this.obj = obj;
 
       obj.scale.multiplyScalar(Config.model.scale);
