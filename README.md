@@ -1,4 +1,6 @@
 # Three.js Webpack ES6 Boilerplate
+https://github.com/paulmg/ThreeJS-Webpack-ES6-Boilerplate/
+
 A basic boilerplate for a Three.js project including the use of Webpack and ES6 syntax via Babel.
 
 ## Project Structure
