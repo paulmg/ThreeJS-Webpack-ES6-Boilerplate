@@ -31,7 +31,26 @@ export default class Stats {
       ],
       plugins: [bS, tS, glS]
     });
+
+    this.element = window.document.getElementsByClassName('rs-base')[0];
   };
+
+  hide() {
+    this.element.style.display = 'none';
+  }
+
+  show() {
+    this.element.style.display = 'block';
+  }
+
+  toggleVisibility() {
+    if(this.element.style.display === 'none')
+    {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
 
   static start() {
     rS('frame').start();
