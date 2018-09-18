@@ -11,7 +11,7 @@ export default class Interaction {
     this.camera = camera;
     this.controls = controls;
     this.stats = stats;
-    this.gui = gui.gui;
+    this.gui = gui && gui.gui;
 
     this.timeout = null;
 
