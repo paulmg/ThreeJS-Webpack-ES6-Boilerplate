@@ -340,11 +340,19 @@ export default class DatGUI {
     this.controls.enableRotate = true;
   }
 
+  show() {
+    this.gui.open();
+  }
+
+  hide() {
+    this.gui.close();
+  }
+
   toggleVisibility() {
     if(this.gui.closed){
-      this.gui.open();
+      this.show();
     } else {
-      this.gui.close();
+      this.hide();
     }
   }
 }
