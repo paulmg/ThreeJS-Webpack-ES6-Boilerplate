@@ -339,4 +339,12 @@ export default class DatGUI {
     // Something is goofy in the foregoing and results in ebableRotate being false here
     this.controls.enableRotate = true;
   }
+
+  toggleVisibility() {
+    if(this.gui.closed){
+      this.gui.open();
+    } else {
+      this.gui.close();
+    }
+  }
 }

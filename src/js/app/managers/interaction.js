@@ -11,7 +11,7 @@ export default class Interaction {
     this.camera = camera;
     this.controls = controls;
     this.stats = stats;
-    this.gui = gui && gui.gui;
+    this.gui = gui;
 
     this.timeout = null;
 
@@ -43,11 +43,7 @@ export default class Interaction {
 
       if(this.keyboard.eventMatches(event, 'g')) {
         if(this.gui) {
-          if(this.gui.closed){
-            this.gui.open();
-          } else {
-            this.gui.close();
-          }
+          this.gui.toggleVisibility();
         }
       }
     });
