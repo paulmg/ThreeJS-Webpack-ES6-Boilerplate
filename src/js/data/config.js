@@ -47,7 +47,7 @@ export default {
   },
   controls: {
     autoRotate: true,
-    autoRotateSpeed: -0.5,
+    autoRotateSpeed: -0.05,
     rotateSpeed: 0.5,
     zoomSpeed: 0.8,
     minDistance: 200,
