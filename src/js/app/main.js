@@ -84,13 +84,13 @@ export default class Main {
 
       // All loaders done now
       this.manager.onLoad = () => {
-        // Set up interaction manager with the app now that the model is finished loading
-        new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls);
-
         // Add dat.GUI controls if dev
         if(Config.isDev) {
-          new DatGUI(this, this.model.obj);
+          this.gui = new DatGUI(this, this.model.obj);
         }
+
+        // Set up interaction manager with the app now that the model is finished loading
+        new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls, this.stats, this.gui);
 
         // Everything is now fully loaded
         Config.isLoaded = true;

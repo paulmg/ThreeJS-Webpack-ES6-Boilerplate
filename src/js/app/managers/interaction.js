@@ -4,12 +4,14 @@ import Config from '../../data/config';
 
 // Manages all input interactions
 export default class Interaction {
-  constructor(renderer, scene, camera, controls) {
+  constructor(renderer, scene, camera, controls, stats, gui) {
     // Properties
     this.renderer = renderer;
     this.scene = scene;
     this.camera = camera;
     this.controls = controls;
+    this.stats = stats;
+    this.gui = gui.gui;
 
     this.timeout = null;
 
@@ -31,6 +33,28 @@ export default class Interaction {
 
       if(this.keyboard.eventMatches(event, 'escape')) {
         console.log('Escape pressed');
+      }
+
+      if(this.keyboard.eventMatches(event, 's')) {
+        if(this.stats) {
+          const display = window.document.getElementsByClassName('rs-base')[0].style.display;
+          if(display === 'none')
+          {
+            window.document.getElementsByClassName('rs-base')[0].style.display = 'block';
+          } else {
+            window.document.getElementsByClassName('rs-base')[0].style.display = 'none';
+          }
+        }
+      }
+
+      if(this.keyboard.eventMatches(event, 'g')) {
+        if(this.gui) {
+          if(this.gui.closed){
+            this.gui.open();
+          } else {
+            this.gui.close();
+          }
+        }
       }
     });
   }

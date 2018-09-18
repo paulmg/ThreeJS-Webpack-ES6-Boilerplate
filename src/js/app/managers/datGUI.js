@@ -3,17 +3,17 @@ import Config from '../../data/config';
 // Manages all dat.GUI interactions
 export default class DatGUI {
   constructor(main, mesh) {
-    const gui = new dat.GUI();
+    this.gui = new dat.GUI();
 
     this.camera = main.camera.threeCamera;
     this.controls = main.controls.threeControls;
     this.light = main.light;
 
     /* Global */
-    //gui.close();
+    //this.gui.close();
 
     /* Camera */
-    const cameraFolder = gui.addFolder('Camera');
+    const cameraFolder = this.gui.addFolder('Camera');
     const cameraFOVGui = cameraFolder.add(Config.camera, 'fov', 0, 180).name('Camera FOV');
     cameraFOVGui.onChange((value) => {
       this.controls.enableRotate = false;
@@ -54,7 +54,7 @@ export default class DatGUI {
 
 
     /* Controls */
-    const controlsFolder = gui.addFolder('Controls');
+    const controlsFolder = this.gui.addFolder('Controls');
     controlsFolder.add(Config.controls, 'autoRotate').name('Auto Rotate').onChange((value) => {
       this.controls.autoRotate = value;
     });
@@ -69,7 +69,7 @@ export default class DatGUI {
 
 
     /* Mesh */
-    const meshFolder = gui.addFolder('Mesh');
+    const meshFolder = this.gui.addFolder('Mesh');
     meshFolder.add(Config.mesh, 'translucent', true).name('Translucent').onChange((value) => {
       if(value) {
         mesh.material.transparent = true;
@@ -85,7 +85,7 @@ export default class DatGUI {
 
     /* Lights */
     // Ambient Light
-    const ambientLightFolder = gui.addFolder('Ambient Light');
+    const ambientLightFolder = this.gui.addFolder('Ambient Light');
     ambientLightFolder.add(Config.ambientLight, 'enabled').name('Enabled').onChange((value) => {
       this.light.ambientLight.visible = value;
     });
@@ -95,7 +95,7 @@ export default class DatGUI {
 
 
     // Directional Light
-    const directionalLightFolder = gui.addFolder('Directional Light');
+    const directionalLightFolder = this.gui.addFolder('Directional Light');
     directionalLightFolder.add(Config.directionalLight, 'enabled').name('Enabled').onChange((value) => {
       this.light.directionalLight.visible = value;
     });
@@ -140,7 +140,7 @@ export default class DatGUI {
     });
 
     // Shadow Map
-    const shadowFolder = gui.addFolder('Shadow Map');
+    const shadowFolder = this.gui.addFolder('Shadow Map');
     shadowFolder.add(Config.shadow, 'enabled').name('Enabled').onChange((value) => {
       this.light.directionalLight.castShadow = value;
     });
@@ -234,7 +234,7 @@ export default class DatGUI {
 
 
     // Point Light
-    const pointLightFolder = gui.addFolder('Point Light');
+    const pointLightFolder = this.gui.addFolder('Point Light');
     pointLightFolder.add(Config.pointLight, 'enabled').name('Enabled').onChange((value) => {
       this.light.pointLight.visible = value;
     });
@@ -289,7 +289,7 @@ export default class DatGUI {
 
 
     // Hemi Light
-    const hemiLightFolder = gui.addFolder('Hemi Light');
+    const hemiLightFolder = this.gui.addFolder('Hemi Light');
     hemiLightFolder.add(Config.hemiLight, 'enabled').name('Enabled').onChange((value) => {
       this.light.hemiLight.visible = value;
     });
