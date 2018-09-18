@@ -56,6 +56,7 @@ You can run any of these individually if you'd like with the npm run command:
 
 ## Input Controls
 * Press H to hide dat.GUI
+* Press S to hide stats
 * Arrow controls will pan
 * Mouse left click will rotate/right click will pan
 * Scrollwheel zooms in and out
