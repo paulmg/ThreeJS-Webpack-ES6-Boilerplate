@@ -335,5 +335,8 @@ export default class DatGUI {
     hemiLightPositionZGui.onFinishChange(() => {
       this.controls.enableRotate = true;
     });
+
+    // Something is goofy in the foregoing and results in ebableRotate being false here
+    this.controls.enableRotate = true;
   }
 }
