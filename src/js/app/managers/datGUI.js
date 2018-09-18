@@ -36,6 +36,8 @@ export default class DatGUI {
 
       this.controls.enableRotate = true;
     });
+    cameraAspectGui.setValue(this.camera.aspect);
+    main.camera.guiUpdate = (aspect) => {cameraAspectGui.setValue(aspect)};
     const cameraFogColorGui = cameraFolder.addColor(Config.fog, 'color').name('Fog Color');
     cameraFogColorGui.onChange((value) => {
       main.scene.fog.color.setHex(value);

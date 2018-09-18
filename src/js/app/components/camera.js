@@ -25,5 +25,10 @@ export default class Camera {
 
     // Always call updateProjectionMatrix on camera change
     this.threeCamera.updateProjectionMatrix();
+
+    // Keep gui aspect updated
+    if(this.guiUpdate) {
+      this.guiUpdate(this.threeCamera.aspect);
+    }
   }
 }
