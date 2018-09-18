@@ -37,12 +37,12 @@ export default class Interaction {
 
       if(this.keyboard.eventMatches(event, 's')) {
         if(this.stats) {
-          const display = window.document.getElementsByClassName('rs-base')[0].style.display;
-          if(display === 'none')
+          const stats = window.document.getElementsByClassName('rs-base')[0];
+          if(stats.style.display === 'none')
           {
-            window.document.getElementsByClassName('rs-base')[0].style.display = 'block';
+            stats.style.display = 'block';
           } else {
-            window.document.getElementsByClassName('rs-base')[0].style.display = 'none';
+            stats.style.display = 'none';
           }
         }
       }
