@@ -91,7 +91,7 @@ export default class Main {
         }
 
         // Set up interaction manager with the app now that the model is finished loading
-        new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls, this.stats, this.gui);
+        new Interaction(this.renderer.threeRenderer, this.scene, this.camera.threeCamera, this.controls.threeControls, this.stats);
 
         // Everything is now fully loaded
         Config.isLoaded = true;

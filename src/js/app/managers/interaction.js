@@ -4,14 +4,13 @@ import Config from '../../data/config';
 
 // Manages all input interactions
 export default class Interaction {
-  constructor(renderer, scene, camera, controls, stats, gui) {
+  constructor(renderer, scene, camera, controls, stats) {
     // Properties
     this.renderer = renderer;
     this.scene = scene;
     this.camera = camera;
     this.controls = controls;
     this.stats = stats;
-    this.gui = gui;
 
     this.timeout = null;
 
