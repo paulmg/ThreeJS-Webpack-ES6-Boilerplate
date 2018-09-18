@@ -4,9 +4,7 @@ let rS, bS, glS, tS;
 export default class Stats {
   constructor(renderer) {
     this.renderer = renderer;
-  }
-
-  setUp() {
+  
     bS = new BrowserStats();
     glS = new glStats();
     tS = new threeStats(this.renderer.threeRenderer);

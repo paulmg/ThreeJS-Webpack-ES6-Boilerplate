@@ -63,7 +63,7 @@ export default class Main {
     // Set up rStats if dev environment
     if(Config.isDev && Config.isShowingStats) {
       this.stats = new Stats(this.renderer);
-      this.stats.setUp();
+      this.stats.hide();
     }
 
     // Instantiate texture class
