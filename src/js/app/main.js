@@ -87,7 +87,7 @@ export default class Main {
         // Add dat.GUI controls if dev
         if(Config.isDev) {
           this.gui = new DatGUI(this, this.model.obj);
-          this.gui.hide();
+          this.gui.toggleHide();
         }
 
         // Set up interaction manager with the app now that the model is finished loading

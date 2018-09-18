@@ -40,12 +40,6 @@ export default class Interaction {
           this.stats.toggleVisibility();
         }
       }
-
-      if(this.keyboard.eventMatches(event, 'g')) {
-        if(this.gui) {
-          this.gui.toggleVisibility();
-        }
-      }
     });
   }
 
