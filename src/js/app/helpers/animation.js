@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export default class Animation {
   constructor(obj, clip) {
-    // Object with animations
+    // Scene that the clip will be applied to
     this.obj = obj;
 
     // Initialize animation mixer
