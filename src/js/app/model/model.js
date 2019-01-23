@@ -18,32 +18,37 @@ export default class Model {
 
   load() {
     // Load model with ObjectLoader
-    this.loader.load(Config.model.path, obj => {
-      obj.traverse(child => {
-        if(child instanceof THREE.Mesh) {
-          // Create material for mesh and set its map to texture by name from preloaded textures
-          const material = new Material(0xffffff).standard;
-          material.map = this.textures.UV;
-          child.material = material;
+    this.loader.load(
+      Config.model.path,
+      obj => {
+        obj.traverse(child => {
+          if(child instanceof THREE.Mesh) {
+            // Create material for mesh and set its map to texture by name from preloaded textures
+            const material = new Material(0xffffff).standard;
+            material.map = this.textures.UV;
+            child.material = material;
 
-          // Set to cast and receive shadow if enabled
-          if(Config.shadow.enabled) {
-            child.receiveShadow = true;
-            child.castShadow = true;
+            // Set to cast and receive shadow if enabled
+            if(Config.shadow.enabled) {
+              child.receiveShadow = true;
+              child.castShadow = true;
+            }
           }
+        });
+
+        // Add mesh helper if Dev
+        if(Config.isDev && Config.mesh.enableHelper) {
+          new MeshHelper(this.scene, obj);
         }
-      });
 
-      // Add mesh helper if Dev
-      if(Config.isDev && Config.mesh.enableHelper) {
-        new MeshHelper(this.scene, obj);
-      }
+        // Set prop to obj so it can be accessed from outside the class
+        this.obj = obj;
 
-      // Set prop to obj so it can be accessed from outside the class
-      this.obj = obj;
-
-      obj.scale.multiplyScalar(Config.model.scale);
-      this.scene.add(obj);
-    }, Helpers.logProgress(), Helpers.logError());
+        obj.scale.multiplyScalar(Config.model.scale);
+        this.scene.add(obj);
+      },
+      Helpers.logProgress(),
+      Helpers.logError()
+    );
   }
 }
