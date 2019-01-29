@@ -2,9 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Three.js Webpack ES6 Boilerplate</title>
-
-    <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
 
   <body>
@@ -12,8 +10,10 @@
       <div id="loading">Loading...</div>
     </section>
 
-    <script src="assets/js/rStats.js"></script>
-    <script src="assets/js/rStats.extras.js"></script>
-    <script src="assets/js/dat.gui.min.js"></script>
+    <% if (htmlWebpackPlugin.options.env === 'dev') { %>
+    <script src="js/rStats.js"></script>
+    <script src="js/rStats.extras.js"></script>
+    <script src="js/dat.gui.min.js"></script>
+    <% } %>
   </body>
 </html>
