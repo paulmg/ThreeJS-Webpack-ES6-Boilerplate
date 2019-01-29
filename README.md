@@ -32,7 +32,7 @@ Then run dev script:
 npm run dev
 ```
 
-Spins up a webpack dev server at localhost:8080 and keeps track of all js and sass changes to files. Only reloads automatically upon save of js files.
+Spins up a webpack dev server at localhost:8080 and keeps track of all js and sass changes to files.
 
 ## Build
 ```
@@ -48,14 +48,12 @@ You can run any of these individually if you'd like with the npm run command:
 * lint - Runs lint on `src/js` folder and uses `.eslintrc` file in root as linting rules
 * webpack-server - Create webpack-dev-server with hot-module-replacement
 * webpack-watch - Run webpack in dev environment with watch
-* dev:sass - Run node-sass on `src/css` folder and output to `src/public` and watch for changes
 * dev:js - Run webpack in dev environment without watch
 * build:dir - Copy files and folders from `src/public` to `build`
-* build:sass - Run node-sass on `src/css` and output compressed css to `build` folder
 * build:js - Run webpack in production environment
 
 ## Input Controls
 * Press H to hide dat.GUI
 * Arrow controls will pan
 * Mouse left click will rotate/right click will pan
-* Scrollwheel zooms in and out
+* Scroll wheel zooms in and out
