@@ -2,12 +2,16 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 // Paths
 const entry = './src/js/app.js';
 const includePath = path.join(__dirname, 'src/js');
 const nodeModulesPath = path.join(__dirname, 'node_modules');
-let outputPath = path.join(__dirname, 'src/public/assets/js');
+
+let outputPath = path.join(__dirname, 'src/public/js');
 
 module.exports = env => {
   // Dev environment
@@ -25,7 +29,7 @@ module.exports = env => {
     devtool = 'hidden-source-map';
     mode = 'production';
     stats = 'none';
-    outputPath = `${__dirname}/build/public/assets/js`;
+    outputPath = `${__dirname}/build/js`;
   }
 
   console.log('Webpack build -');
@@ -47,7 +51,7 @@ module.exports = env => {
       // must be an absolute path (use the Node.js path module)
       path: outputPath,
       // the url to the output directory resolved relative to the HTML page
-      publicPath: 'assets/js',
+      publicPath: 'js',
       // the filename template for entry chunks
       filename: 'app.js'
     },
@@ -78,12 +82,20 @@ module.exports = env => {
           exclude: nodeModulesPath,
         },
         {
-          test: /\.scss$/,
+          test: /\.(s*)css$/,
           use: [
-            'style-loader',
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                // you can specify a publicPath here
+                // by default it use publicPath in webpackOptions.output
+                publicPath: 'css'
+              }
+            },
             'css-loader',
-            'sass-loader'
-          ]
+            'postcss-loader',
+            'sass-loader',
+          ],
         }
       ]
     },
@@ -94,11 +106,11 @@ module.exports = env => {
       // directories where to look for modules,
       modules: [
         'node_modules',
-        path.resolve(__dirname, 'app')
+        path.resolve(__dirname, 'src')
       ],
 
       // extensions that are used
-      extensions: ['.js', '.json', '.css'],
+      extensions: ['.js', '.json'],
     },
 
     performance: {
@@ -116,12 +128,28 @@ module.exports = env => {
       contentBase: 'src/public'
     },
 
-    plugins: plugins.concat(new HtmlWebpackPlugin({
-      template: './src/html/index.html',
-      filename: '../../index.html',
-    })),
+    plugins: plugins.concat(
+      new HtmlWebpackPlugin({
+        title: 'Three.js Webpack ES6 Boilerplate',
+        template: path.join(__dirname, 'src/html/index.html'),
+        filename: '../index.html',
+        env: env.NODE_ENV,
+      }),
+      new MiniCssExtractPlugin({
+        filename: '../css/[name].css',
+        chunkFilename: '../css/[id].css'
+      })
+    ),
 
     optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true // set to true if you want JS source maps
+        }),
+        new OptimizeCSSAssetsPlugin({})
+      ],
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
@@ -129,6 +157,12 @@ module.exports = env => {
             test: /[\\\/]node_modules[\\\/]/,
             name: 'vendors',
             chunks: 'all'
+          },
+          styles: {
+            name: 'styles',
+            test: /\.css$/,
+            chunks: 'all',
+            enforce: true
           }
         }
       }
