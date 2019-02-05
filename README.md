@@ -17,7 +17,7 @@ src - Directory for all dev files
 │   ├── data - Any data to be imported into app
 │   └── utils - Various helpers and vendor classes
 └── public - Used by webpack-dev-server to serve content. Webpack builds local dev files here. 
-  └── assets - Is copied over to build folder with build command. Place external asset files here.
+    └── assets - Is copied over to build folder with build command. Place external asset files here.
 ```
 
 ## Getting started
