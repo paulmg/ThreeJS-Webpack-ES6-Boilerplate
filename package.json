@@ -8,13 +8,13 @@
     "dev": "run-s dev:dir dev:js webpack-server",
     "build": "run-s prebuild build:dir build:js",
     "prebuild": "run-s clean lint",
-    "clean": "rimraf build",
+    "clean": "rimraf build/prod",
     "lint": "eslint src/js/",
     "webpack-server": "webpack-dev-server --env.NODE_ENV=dev --progress --color --open --hot",
     "webpack-watch": "webpack --env.NODE_ENV=dev --progress --color --watch --hot",
     "dev:dir": "copyfiles -a -u 2 src/assets/**/*.* build/dev/assets",
     "dev:js": "webpack --env.NODE_ENV=dev",
-    "build:dir": "copyfiles -a -u 2 src/public/assets/**/*.* build/",
+    "build:dir": "copyfiles -a -u 2 src/assets/**/*.* build/prod/assets",
     "build:js": "webpack --env.NODE_ENV=prod --progress --color"
   },
   "dependencies": {
