@@ -12,7 +12,7 @@ export default class Stats {
     tS = new threeStats(this.renderer.threeRenderer);
 
     rS = new rStats({
-      CSSPath: './css/',
+      CSSPath: './assets/vendor/rstats/',
       userTimingAPI: true,
       values: {
         frame: { caption: 'Total frame time (ms)', over: 16, average: true, avgMs: 100 },

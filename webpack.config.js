@@ -11,7 +11,7 @@ const entry = './src/js/app.js';
 const includePath = path.join(__dirname, 'src/js');
 const nodeModulesPath = path.join(__dirname, 'node_modules');
 
-let outputPath = path.join(__dirname, 'src/public/js');
+let outputPath = path.join(__dirname, 'build/dev/js');
 
 module.exports = env => {
   // Dev environment
@@ -29,7 +29,7 @@ module.exports = env => {
     devtool = 'hidden-source-map';
     mode = 'production';
     stats = 'none';
-    outputPath = `${__dirname}/build/js`;
+    outputPath = `${__dirname}/build/prod/js`;
   }
 
   console.log('Webpack build -');
@@ -125,7 +125,7 @@ module.exports = env => {
     devtool,
 
     devServer: {
-      contentBase: 'src/public'
+      contentBase: 'build/dev'
     },
 
     plugins: plugins.concat(
