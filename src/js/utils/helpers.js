@@ -8,7 +8,7 @@ export default class Helpers {
       const context = scope || this;
 
       const now  = +new Date,
-          args = arguments;
+        args = arguments;
 
       if(last && now < last + threshhold) {
         clearTimeout(deferTimer);
