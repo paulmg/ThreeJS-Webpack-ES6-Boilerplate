@@ -1,4 +1,4 @@
-import TWEEN from 'tween.js';
+import TWEEN from '@tweenjs/tween.js';
 
 // This object contains the state of the app
 export default {
@@ -14,17 +14,30 @@ export default {
   easing: TWEEN.Easing.Quadratic.InOut,
   duration: 500,
   model: {
-    path: './assets/models/Teapot.json',
-    scale: 20
+    selected: 0,
+    initialTypes: ['gltf', 'object'],
+    type: 'gltf'
   },
+  models: [
+    {
+      path: './assets/models/duck.gltf',
+      scale: 20,
+      type: 'gltf'
+    },
+    {
+      path: './assets/models/Teapot.json',
+      scale: 20,
+      type: 'object'
+    }
+  ],
   texture: {
     path: './assets/textures/',
     imageFiles: [
-      {name: 'UV', image: 'UV_Grid_Sm.jpg'}
+      { name: 'UV', image: 'UV_Grid_Sm.jpg' }
     ]
   },
   mesh: {
-    enableHelper: false,
+    enableHelper: true,
     wireframe: false,
     translucent: false,
     material: {

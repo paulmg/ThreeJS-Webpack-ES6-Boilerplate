@@ -1,6 +1,6 @@
 // Global imports -
 import * as THREE from 'three';
-import TWEEN from 'tween.js';
+import TWEEN from '@tweenjs/tween.js';
 
 // Local imports -
 // Components
@@ -8,10 +8,11 @@ import Renderer from './components/renderer';
 import Camera from './components/camera';
 import Light from './components/light';
 import Controls from './components/controls';
+import Geometry from './components/geometry';
 
 // Helpers
-import Geometry from './helpers/geometry';
 import Stats from './helpers/stats';
+import MeshHelper from './helpers/meshHelper';
 
 // Model
 import Texture from './model/texture';
@@ -66,6 +67,11 @@ export default class Main {
       this.stats.setUp();
     }
 
+    // Set up gui
+    if (Config.isDev) {
+      this.gui = new DatGUI(this)
+    }
+
     // Instantiate texture class
     this.texture = new Texture();
 
@@ -75,7 +81,7 @@ export default class Main {
 
       // Textures loaded, load model
       this.model = new Model(this.scene, this.manager, this.texture.textures);
-      this.model.load();
+      this.model.load(Config.models[Config.model.selected].type);
 
       // onProgress callback
       this.manager.onProgress = (item, loaded, total) => {
@@ -89,7 +95,10 @@ export default class Main {
 
         // Add dat.GUI controls if dev
         if(Config.isDev) {
-          new DatGUI(this, this.model.obj);
+          this.meshHelper = new MeshHelper(this.scene, this.model.obj);
+          if (Config.mesh.enableHelper) this.meshHelper.enable();
+
+          this.gui.load(this, this.model.obj);
         }
 
         // Everything is now fully loaded
