@@ -116,9 +116,9 @@ window.threeStats = function ( renderer ) {
     'renderer.info.render.calls': {
       caption: 'Calls'
     },
-    'renderer.info.render.faces': {
-      caption: 'Faces',
-      over: 1000
+    'renderer.info.render.triangles': {
+      caption: 'Triangles',
+      over: 5000
     },
     'renderer.info.render.points': {
       caption: 'Points'
@@ -133,21 +133,18 @@ window.threeStats = function ( renderer ) {
     values: [ 'renderer.info.memory.geometries', 'renderer.info.programs', 'renderer.info.memory.textures' ]
   }, {
     caption: 'Three.js - Render',
-    values: [ 'renderer.info.render.calls', 'renderer.info.render.faces', 'renderer.info.render.points', 'renderer.info.render.vertices' ]
+    values: [ 'renderer.info.render.calls', 'renderer.info.render.triangles', 'renderer.info.render.points' ]
   } ];
 
   var _fractions = [];
 
   function _update () {
-
     _rS( 'renderer.info.memory.geometries' ).set( renderer.info.memory.geometries );
     //_rS( 'renderer.info.programs' ).set( renderer.info.programs.length );
     _rS( 'renderer.info.memory.textures' ).set( renderer.info.memory.textures );
     _rS( 'renderer.info.render.calls' ).set( renderer.info.render.calls );
-    _rS( 'renderer.info.render.faces' ).set( renderer.info.render.faces );
-    _rS( 'renderer.info.render.points' ).set( renderer.info.render.points );
-    _rS( 'renderer.info.render.vertices' ).set( renderer.info.render.vertices );
-
+    _rS( 'renderer.info.render.triangles' ).set( renderer.info.render.triangles );
+    // _rS( 'renderer.info.render.points' ).set( renderer.info.render.points );
   }
 
   function _start () {}
