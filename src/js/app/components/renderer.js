@@ -24,7 +24,7 @@ export default class Renderer {
     this.threeRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     // Get anisotropy for textures
-    Config.maxAnisotropy = this.threeRenderer.getMaxAnisotropy();
+    Config.maxAnisotropy = this.threeRenderer.capabilities.getMaxAnisotropy();
 
     // Initial size update set to canvas container
     this.updateSize();
