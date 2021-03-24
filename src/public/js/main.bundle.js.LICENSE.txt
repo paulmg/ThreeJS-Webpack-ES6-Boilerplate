@@ -1,14 +1,58 @@
-/*! exports provided: BufferGeometryUtils */
+/*! ../../data/config */
 
-/*! exports provided: GLTFLoader */
+/*! ../../utils/bufferGeometryUtils */
 
-/*! exports provided: VertexNormalsHelper */
+/*! ../../utils/helpers */
 
-/*! exports provided: default */
+/*! ../../utils/keyboard */
 
-/*! no exports provided */
+/*! ../../utils/orbitControls */
 
-/*! no static exports found */
+/*! ../components/material */
+
+/*! ../loaders/GLTFLoader */
+
+/*! ./../css/app.scss */
+
+/*! ./../data/config */
+
+/*! ./app/main */
+
+/*! ./components/camera */
+
+/*! ./components/controls */
+
+/*! ./components/geometry */
+
+/*! ./components/light */
+
+/*! ./components/renderer */
+
+/*! ./data/config */
+
+/*! ./helpers/meshHelper */
+
+/*! ./helpers/stats */
+
+/*! ./managers/datGUI */
+
+/*! ./managers/interaction */
+
+/*! ./material */
+
+/*! ./model/model */
+
+/*! ./model/texture */
+
+/*! ./utils/detector */
+
+/*! ./vertexNormalsHelper */
+
+/*! @tweenjs/tween.js */
+
+/*! es6-promise */
+
+/*! three */
 
 /*!***********************!*\
   !*** ./src/js/app.js ***!
@@ -21,10 +65,6 @@
 /*!****************************!*\
   !*** ./src/js/app/main.js ***!
   \****************************/
-
-/*!*****************************!*\
-  !*** multi ./src/js/app.js ***!
-  \*****************************/
 
 /*!*******************************!*\
   !*** ./src/js/data/config.js ***!
