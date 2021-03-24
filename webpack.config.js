@@ -4,7 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 // Paths
 const entry = './src/js/app.js';
@@ -15,7 +15,7 @@ let outputPath = path.join(__dirname, 'src/public/js');
 
 module.exports = env => {
   // Dev environment
-  let devtool = 'eval';
+  let devtool = 'inline-source-map';
   let mode = 'development';
   let stats = 'minimal';
   let plugins = [
@@ -53,7 +53,8 @@ module.exports = env => {
       // the url to the output directory resolved relative to the HTML page
       publicPath: 'js',
       // the filename template for entry chunks
-      filename: 'app.js'
+      filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js',
     },
 
     // Webpack 4 mode helper
@@ -125,7 +126,7 @@ module.exports = env => {
     devtool,
 
     devServer: {
-      contentBase: 'src/public'
+      static: 'src/public',
     },
 
     plugins: plugins.concat(
@@ -142,13 +143,10 @@ module.exports = env => {
     ),
 
     optimization: {
+      minimize: true,
       minimizer: [
-        new TerserPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true // set to true if you want JS source maps
-        }),
-        new OptimizeCSSAssetsPlugin({})
+        new TerserPlugin(),
+        new OptimizeCSSAssetsPlugin()
       ],
       runtimeChunk: 'single',
       splitChunks: {
