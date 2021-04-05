@@ -1,6 +1,6 @@
 {
   "name": "threejs-es6-webpack-boilerplate",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Boilerplate for Three.js projects set up with Babel for ES6 and compiled with webpack",
   "author": "Paul Graffam",
   "main": "app.js",
