@@ -51,7 +51,8 @@ module.exports = env => {
       // must be an absolute path (use the Node.js path module)
       path: outputPath,
       // the url to the output directory resolved relative to the HTML page
-      publicPath: 'js',
+      // should include at least trailing slash
+      publicPath: '/js/',
       // the filename template for entry chunks
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js',
