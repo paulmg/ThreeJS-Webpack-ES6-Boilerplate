@@ -12,6 +12,7 @@ const includePath = path.join(__dirname, 'src/js');
 const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 let outputPath = path.join(__dirname, 'src/public/js');
+let publicPath = '/js/';
 
 module.exports = env => {
   // Dev environment
@@ -30,6 +31,7 @@ module.exports = env => {
     mode = 'production';
     stats = 'none';
     outputPath = `${__dirname}/build/js`;
+    publicPath = 'js/';
   }
 
   console.log('Webpack build -');
@@ -51,8 +53,7 @@ module.exports = env => {
       // must be an absolute path (use the Node.js path module)
       path: outputPath,
       // the url to the output directory resolved relative to the HTML page
-      // should include at least trailing slash
-      publicPath: '/js/',
+      publicPath,
       // the filename template for entry chunks
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js',
