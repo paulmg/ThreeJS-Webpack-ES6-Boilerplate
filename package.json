@@ -22,7 +22,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^18.6.4",
     "es6-promise": "^4.2.8",
-    "three": "^0.126.1"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
